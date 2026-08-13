@@ -45,7 +45,7 @@ func (executor *Executor) Execute(_ context.Context, request contracts.NodeInvoc
 	}
 	proposal := contracts.EffectProposal{
 		EffectKey: "mcp-call", Kind: "xgc.mcp-call/v1", TargetRef: server,
-		IntentSchemaDigest: packageDigest, IntentDigest: intentDigest, Ownership: contracts.EffectAttached,
+		IntentSchemaDigest: packageDigest, Intent: intent, IntentDigest: intentDigest, Ownership: contracts.EffectAttached,
 		CompensationPolicy: contracts.CompensationNone, RequiredCapabilityRefs: []string{"mcp.invoke"},
 		PolicyDigest: request.CapabilityGrants[0].AuthorizationDigest, Deadline: request.Deadline,
 	}
