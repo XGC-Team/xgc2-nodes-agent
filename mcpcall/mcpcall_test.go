@@ -7,6 +7,7 @@ import (
 
 	"github.com/lxk36/xgc2-orchestration-core/conformance/nodepack"
 	"github.com/lxk36/xgc2-orchestration-core/kernel/canonicaljson"
+	protocol "github.com/lxk36/xgc2-orchestration-core/kernel/node"
 	"github.com/lxk36/xgc2-orchestration-core/sdk/go/contracts"
 	nodesdk "github.com/lxk36/xgc2-orchestration-core/sdk/go/node"
 )
@@ -17,7 +18,8 @@ func TestNodePackConformance(t *testing.T) {
 	digest, _ := canonicaljson.DigestValue(input)
 	t0 := time.Date(2026, 8, 13, 2, 0, 0, 0, time.UTC)
 	request := contracts.NodeInvocationRequest{
-		InvocationID: "inv-1", RunID: "run-1", NodeID: "mcp", TypeRef: executor.Descriptor().TypeRef,
+		SchemaVersion: protocol.InvocationSchemaVersion,
+		InvocationID:  "inv-1", RunID: "run-1", NodeID: "mcp", TypeRef: executor.Descriptor().TypeRef,
 		DescriptorDigest: executor.Descriptor().DescriptorDigest, AttemptID: "att-1", AttemptOrdinal: 1,
 		Input: input, InputDigest: digest,
 		CapabilityGrants: []contracts.CapabilityGrant{{CapabilityRef: "mcp.invoke", Scope: "project", HandleRef: "grant-1", AuthorizationDigest: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", ExpiresAt: t0.Add(time.Minute)}},

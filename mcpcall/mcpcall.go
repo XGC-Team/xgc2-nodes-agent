@@ -54,7 +54,8 @@ func (executor *Executor) Execute(_ context.Context, request contracts.NodeInvoc
 		return contracts.NodeResult{}, err
 	}
 	return contracts.NodeResult{
-		Status: contracts.NodeResultWaiting, Effects: []contracts.EffectProposal{proposal},
+		SchemaVersion: protocol.ResultSchemaVersion,
+		Status:        contracts.NodeResultWaiting, Effects: []contracts.EffectProposal{proposal},
 		Wait:           &contracts.NodeWait{Kind: contracts.NodeWaitEffect, SubjectRef: proposal.EffectKey, ConditionDigest: intentDigest},
 		EvidenceDigest: evidence,
 	}, nil
